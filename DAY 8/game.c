@@ -22,7 +22,7 @@ game()
 	printmine(show, ROW, COL);//打印数组
 
 	//布置雷
-	//Boardmine(mine[ROWS][COLS], ROW, COL,n);//存储雷的信息。
+	setBoard(mine, ROW, COL,n);//存储雷的信息。
 
 	////排雷
 	//Boardshow(show[ROWS][COLS], ROW, COL,n);//排雷的信息。
