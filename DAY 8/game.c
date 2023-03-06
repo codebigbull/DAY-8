@@ -18,8 +18,8 @@ game()
 	Initboard(mine, ROWS, COLS, '0');
 	Initboard(show, ROWS, COLS, '*');
 
-	printboard(mine, ROW, COL);//打印数组
-	printboard(show, ROW, COL);//打印数组
+	//printboard(mine, ROW, COL);//打印数组
+	printboard(show, ROW, COL, EASY);//打印数组
 
 	//布置雷
 	setboard(mine, ROW, COL,EASY);//存储雷的信息。
@@ -32,6 +32,7 @@ game()
 
 int main()
 {
+	//Time();
 	int input = 0;
 	srand((unsigned int)time(NULL));//生成随机数。
 	do
@@ -39,6 +40,7 @@ int main()
 		menu();
 		printf("请选择：（1 or 0 ）。\n");
 		scanf("%d", &input);
+		system("cls");
 		switch (input)
 		{
 		case 1:

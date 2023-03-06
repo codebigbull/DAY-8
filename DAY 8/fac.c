@@ -16,7 +16,7 @@ void Initboard(char get[ROWS][COLS], int rows, int cols, char set)
 }
 
 
-void printboard(char get[ROWS][COLS], int row, int col)
+void printboard(char get[ROWS][COLS], int row, int col,int n)
 {
 	int i = 0;
 	int j = 0;
@@ -38,7 +38,7 @@ void printboard(char get[ROWS][COLS], int row, int col)
 		}
 		printf("\n");
 	}
-	printf("~~~~~扫雷游戏~~~~~~\n");
+	printf("~~~~~雷* %d ~~~~~~\n",n);
 
 }
 
@@ -60,6 +60,7 @@ void setboard(char get[ROWS][COLS], int row, int col, int n)
 
 int  num(char got[ROWS][COLS], int x, int y)
 {
+	
 	return got[x - 1][y - 1] +
 		got[x - 1][y] +
 		got[x - 1][y + 1] +
@@ -71,31 +72,89 @@ int  num(char got[ROWS][COLS], int x, int y)
 }
 
 
+void Time()
+{
+	int h = 0;
+	int m = 0;
+	int s = 0;
+	for (h = 0; h < 10; h++)
+	{
+		for (m = 0; m < 60; m++)
+		{
+			for (s = 0; s < 60; s++)
+			{
+				Sleep(990);
+				system("cls");
+			}
+		}
+	}
+	
+}
+
 void judgeboard(char got[ROWS][COLS], char get[ROWS][COLS], int row, int col, int n)
 {
 	int a = 0;
 	int b = 0;
+	int i = 0;
+	int j = 0;
+	int input = 0;
 	int count = 0;
 	while (count<row*col-n)
 	{
-		printf("请输入排查的坐标：（a b)。");
-		scanf("%d %d", &a, &b);
-		if (get[a][b] != '1')
+		printf("请输入排查或标记：（1 or 2)。\n");
+		scanf("%d", &input);
+		switch (input)
 		{
-			get[a][b] = num(got, a, b) + '0';
-			printboard(get, ROW, COL);
-			count++;
-		}
-		else if (get[a][b] == '1')
-		{
-			printf("很遗憾，你被炸死了。\n");
-			printboard(got, ROW, COL);
+		case 1:
+			printf("请输入排查的坐标：（a b)。\n");
+			scanf("%d %d", &a, &b);
+			system("cls");
+			if (get[a][b] != '1')
+			{
+				get[a][b] = num(got, a, b) + '0';
+				if (get[a][b] == '0')
+				{
+					for (i = a - 1; i <= a + 1; i++)
+					{
+						for (j = b - 1; j <= b + 1; j++)
+						{
+							get[i][j] = num(got, i, j) + '0';
+							count++;
+						}
+					}
+					printboard(get, ROW, COL, n);
+				}
+				else
+				{
+					printboard(get, ROW, COL, n);
+					count++;
+				}
+				
+			}
+			else if (get[a][b] == '1')
+			{
+				printf("很遗憾，你被炸死了。\n");
+				printboard(got, ROW, COL, n);
+				break;
+			}
+			else
+			{
+				printf("输入错误，请重新输入：\n");
+			}
+			break;
+		case 2:
+			printf("请输入标记的坐标：（a b)。\n");
+			scanf("%d %d", &a, &b);
+			system("cls");
+			get[a][b] = 'x';
+			n--;
+			printboard(get, ROW, COL, n);
+			break;
+		default:
+			printf("输入错误，请重新输入：\n");
 			break;
 		}
-		else
-		{
-			printf("输入错误，请重新输入：");
-		}
+		
 	}
 	if (count == row * col - n)
 	{
