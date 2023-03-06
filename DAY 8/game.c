@@ -18,20 +18,16 @@ game()
 	Initboard(mine, ROWS, COLS, '0');
 	Initboard(show, ROWS, COLS, '*');
 
-	printmine(mine, ROW, COL);//打印数组
-	printmine(show, ROW, COL);//打印数组
+	printboard(mine, ROW, COL);//打印数组
+	printboard(show, ROW, COL);//打印数组
 
 	//布置雷
-	setBoard(mine, ROW, COL,n);//存储雷的信息。
+	setboard(mine, ROW, COL,EASY);//存储雷的信息。
+	//printboard(mine, ROW, COL);//打印数组
+
 
 	////排雷
-	//Boardshow(show[ROWS][COLS], ROW, COL,n);//排雷的信息。
-
-	////判断
-
-
-	////打印棋盘
-	//printmine(mine[ROWS][COLS], ROW, COL);//打印数组
+	judgeboard(mine, show, ROW, COL, EASY);//排雷的信息。
 }
 
 int main()

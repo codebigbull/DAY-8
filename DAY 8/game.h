@@ -8,8 +8,15 @@
 #define COL 9
 #define ROWS ROW+2
 #define COLS COL+2
+#define EASY 80
 
-void Initboard(char* get[ROWS][COLS], int row, int col, char set);
+void Initboard(char get[ROWS][COLS], int row, int col, char set);
 
-void printmine(char* get[ROWS][COLS], int row, int col);//打印数组
+void printboard(char get[ROWS][COLS], int row, int col);
+
+void setboard(char get[ROWS][COLS], int row, int col, int n);
+
+void judgeboard(char got[ROWS][COLS], char get[ROWS][COLS], int row, int col, int n);
+int num(char got[ROWS][COLS], int x, int y);//计算附近雷数量。
+
 
